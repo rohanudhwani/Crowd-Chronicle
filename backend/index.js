@@ -1,9 +1,18 @@
 const express = require('express');
 const app = express();
+const News = require('./news/news.js');
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>');
-})
+app.use(express.static('public'));
+
+const news = new News();
+const data = news.getAll();
+
+const test = async () => {
+  const data = await news.getByCategory('Technology');
+  console.log(data);
+}
+
+test();
 
 app.listen(3000, () => {
   console.log('Port is listening.');
